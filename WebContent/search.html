@@ -2,9 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/vegehome.css">
+    <link rel="stylesheet" type="text/css" href="css/search.css">
     <title>数据查询</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/select.js"></script>
 </head>
 <body>
+<div id="title">
+    <img src="img/智慧菜市云-logo.png" alt="智慧菜市云平台" class="title-img">
+</div>
+<nav>
+    <img src="img/nav.png" class="title-nav" style="height: 120px">
+    <p style="margin-left: 1065px;" class="nav-text"><a href="index.html" style="color: #fff54e">首页</a></p>
+    <div class="line" ></div>
+    <p class="nav-text"><a href="search.html">查询</a></p>
+    <div class="line"></div>
+    <p class="nav-text"><a href="statistics.html">统计</a></p>
+    <div class="line" ></div>
+    <p class="nav-text"><a href="" >分析</a></p>
+    <div class="line"></div>
+    <p class="nav-text"><a href="">关于</a></p>
+    <div class="line"></div>
+</nav>
+<div id="cover">
+    <div id="select-city">
+        <form method="get" id="chartsform">
+            <select name="administrative" id="administrative" >
+                <option value="1" selected="selected">青羊区</option>
+                <option value="2">武侯区</option>
+                <option value="3">金牛区</option>
+                <option value="4">锦江区</option>
+                <option value="5">成华区</option>
+                <option value="6">双流区</option>
+            </select>
+            <select name="year" id="year">
+                <option value="2018" selected="selected">2018年</option>
+            </select>
+            <select name="month" id="month">
+                <option value="1" selected="selected">01月</option>
+            </select>
+            <select name="result" id="result">
+                <option value="合格" selected="selected">合格</option>
+                <option value="不合格">不合格</option>
+            </select>
+            <button type="button" id="submit">提交</button>
+        </form>
+    </div>
+    <div id="table">
+        <table border="1" id="table-title" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>样品编号</th>
+                <th>经营户</th>
+                <th>样品名称</th>
+                <th>产地</th>
+                <th>进货渠道</th>
+                <th>检测指标</th>
+                <th>检测结论</th>
+                <th>检测时间</th>
+            </tr>
+        </table>
+        <table border="1" id="table-data" cellspacing="0" cellpadding="0">
 
+        </table>
+    </div>
+</div>
+<script type="text/javascript">//渲染日期模块
+var Year = $("#year option:selected").val();
+var Month = $("#month option:selected").val();
+var Result = $("#result option:selected").val();
+$(function(){
+    $("#date").selectDate();
+    $.ajax({
+        type:"GET",
+        url:"Testservlet",
+        data:{
+            "year":Year,
+            "month":Month,
+            "result":Result
+        },
+        async:true,
+        dataType:"json",
+        success:function (data) {
+            console.log("jsondatta",data);
+            var item;
+            $.each(data,function (i,n) {
+                if (i%2==0){
+                    $("#table-data td").addClass("background-b");
+                }
+                else{
+                    $("#table-data td").addClass("background-w");
+                }
+                item = "<tr><td>" + i + "</td><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.location + "</td><td>" +
+                    n.channels + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td><td>"+ n.testtm+"</td></tr>";
+                $("#excel-data").append(item);
+            })
+        }
+    });
+})
+</script>
 </body>
 </html>
