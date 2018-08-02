@@ -1,0 +1,367 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'Microsoft YaHei';
+    src: url('../font/Microsoft YaHei UI Light.ttf') format('truetype');
+}
+body{
+    background: #040e3a;
+}
+a{
+    text-decoration: none;
+}
+#title{
+    width: 100%;
+    min-width: 1800px;
+    position: relative;
+}
+.title-img{
+    display: block;
+    margin: 0 0 0 530px;
+}
+nav{
+    position: relative;
+    margin-top: -50px;
+    width: 100%;
+    min-width: 1800px;
+    height: 151px;
+}
+.title-nav{
+    width: 100%;
+    min-width: 1800px;
+    height: 151px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.nav-text{
+    margin-top: 46px;
+    float: left;
+    text-align: center;
+}
+.nav-text a{
+    color: #24aef4;
+    font-size: 20px;
+    font-family: "Microsoft YaHei";
+}
+.nav-text a:hover{
+    color: #FFF54E;
+}
+.line{
+    float: left;
+    width: 1px;
+    height: 25px;
+    margin-top: 49px;
+    background: #24aef4;
+    margin-left: 36px;
+    margin-right: 36px;
+}
+#data-img{
+    width: 1800px;
+    margin:78px auto 0 auto;
+    overflow: hidden;
+}
+.data-img{
+    position: relative;
+    float: left;
+    width: 600px;
+}
+.line-position{
+    position: absolute;
+    top: 112px;
+    left: 41px;
+}
+#indicatorContainer{
+    width: 254px;
+    height: 254px;
+}
+#indicatorContainer canvas{
+    cursor: pointer;
+}
+.indicator{
+    position: absolute;
+    top: 67px;
+    left: 267px;
+}
+#map{
+    width: 1800px;
+    margin: 32px auto 0 auto;
+    position: relative;
+}
+#left-map{
+    float: left;
+    position: relative;
+    width: 1177px;
+    height: 678px;
+    margin-top: 13px;
+    margin-left: 20px;
+    z-index: 1000;
+}
+#map img{
+    position: absolute;
+}
+.hd-img{
+    top: 285px;
+    right: 0;
+    z-index: 1003;
+}
+.border{
+    display: block;
+    top: 0;
+    left: -18px;
+    z-index: 1;
+}
+#map-introduce{
+    width: 350px;
+    height: 100%;
+    right: -350px;
+    overflow-y: auto;
+}
+.map-flash{
+    animation: myfirst 2s;
+    -moz-animation: myfirst 2s;	/* Firefox */
+    -webkit-animation: myfirst 2s;	/* Safari 和 Chrome */
+    -o-animation: myfirst 2s;
+    animation-fill-mode:forwards;
+}
+.close-flash{
+    animation: myfinal 2s;
+    -moz-animation: myfinal 2s;	/* Firefox */
+    -webkit-animation: myfinal 2s;	/* Safari 和 Chrome */
+    -o-animation: myfinal 2s;
+    animation-fill-mode:forwards;
+}
+.but-open{
+    animation: mysecond 2s;
+    -moz-animation: mysecond 2s;	/* Firefox */
+    -webkit-animation: mysecond 2s;	/* Safari 和 Chrome */
+    -o-animation: mysecond 2s;
+    animation-fill-mode:forwards;
+}
+.but-close{
+    animation: mysecond2 2s;
+    -moz-animation: mysecond2 2s;	/* Firefox */
+    -webkit-animation: mysecond2 2s;	/* Safari 和 Chrome */
+    -o-animation: mysecond2 2s;
+    animation-fill-mode:forwards;
+}
+@keyframes myfirst
+{
+    0%   {right: -350px}
+    100% {right: 0}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    0%   {right: -350px}
+    100% {right: 0}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+    0%   {right: -350px}
+    100% {right: 0}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+    0%   {right: -350px}
+    100% {right: 0}
+}
+@keyframes myfinal
+{
+    0%   {right: 0}
+    100% {right: -350px}
+}
+
+@-moz-keyframes myfinal /* Firefox */
+{
+    0%   {right: 0}
+    100% {right: -350px}
+}
+
+@-webkit-keyframes myfinal /* Safari 和 Chrome */
+{
+    0%   {right: 0}
+    100% {right: -350px}
+}
+
+@-o-keyframes myfinal /* Opera */
+{
+    0%   {right: 0}
+    100% {right: -350px}
+}
+@keyframes mysecond
+{
+    0%   {right: 0}
+    100% {right: 350px}
+}
+
+@-moz-keyframes mysecond /* Firefox */
+{
+    0%   {right: 0}
+    100% {right: 350px}
+}
+
+@-webkit-keyframes mysecond /* Safari 和 Chrome */
+{
+    0%   {right: 0}
+    100% {right: 350px}
+}
+
+@-o-keyframes mysecond /* Opera */
+{
+    0%   {right: 0}
+    100% {right: 350px}
+}
+@keyframes mysecond2
+{
+    0%   {right: 350px}
+    100% {right: 0}
+}
+
+@-moz-keyframes mysecond2 /* Firefox */
+{
+    0%   {right: 350px}
+    100% {right: 0}
+}
+
+@-webkit-keyframes mysecond2 /* Safari 和 Chrome */
+{
+    0%   {right: 350px}
+    100% {right: 0}
+}
+
+@-o-keyframes mysecond2 /* Opera */
+{
+    0%   {right: 350px}
+    100% {right: 0}
+}
+#myList{
+    list-style: none;
+    margin:0 ;
+    padding: 0;
+}
+#myList li{
+    cursor: pointer;
+}
+#food-market{
+    width: 200px;
+    height:30px;
+    color:  #FFF54E;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei";
+    position: absolute;
+    top: 0;
+    left: 510px;
+    z-index: 1005;
+    background:transparent;
+    appearance:none;
+    -moz-appearance:none ;/*火狐*/
+    -webkit-appearance:none ;/*苹果和谷歌*/
+    border: none;
+}
+#food-market option::-ms-expand{ display: none; }
+select#food-market option{
+    width: 200px;
+    height:30px;
+    text-align: center;
+    font-size: 24px;
+    color:  #FFF54E;
+    font-family: "Microsoft YaHei";
+    background:rgba(18,19,49,0.67);
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari 和 Chrome */
+}
+/* --背景色字体颜色--*/
+#food-market option:hover{
+    background-color:rgba(83,201,235,0.3);
+}
+.select-img{
+    position: absolute;
+    top: 0;
+    left: 500px;
+    z-index: 1004;
+}
+.li-hover{
+    margin-top: 0;
+    display: block;
+}
+.li-hover p{
+    text-align: left;
+    margin:0 0 0 30px;
+    color: #FFF54E;
+}
+.my-btn1{
+    font-weight: bold;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+.my-btn2{
+    font-weight: bold;
+    font-size: 15px;
+    height: 50px;
+    line-height: 50px;
+}
+.address1,.address2{
+    font-size: 14px;
+}
+.li-hover:hover{
+    background: rgba(83,201,235,0.3);
+}
+.bottom-link{
+    margin-top: 15px;
+    width: 100%;
+    height: 1px;
+    background: #053b7b;
+}
+#excel{
+    float: right;
+    width: 520px;
+    height: 680px;
+    margin-top: 10px ;
+    margin-right: 35px;
+    position: relative;
+    background: #121331;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.excel-img{
+    display: block;
+    top: 10px;
+    right: 30px;
+    z-index: 1007;
+}
+#excel-data{
+    position: relative;
+    z-index: 1009;
+    width:500px;
+    margin-left:10px;
+}
+#excel-data th{
+    width: 129px;
+    text-align: center;
+    height: 40px;
+    color:#FFF54E ;
+    border: 1px solid #07306b;
+}
+#excel-data td{
+    width: 129px;
+    text-align: center;
+    height: 40px;
+    color:#FFF54E ;
+    border: 1px solid #07306b;
+}
+#excel-data td{
+    text-align: center;
+}
+.clear{
+    clear: both;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>vegeproject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Testservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Testservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Testservlet</servlet-name>
+    <url-pattern>/Servlet/Testservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Chartservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Chartservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Chartservlet</servlet-name>
+    <url-pattern>/Servlet/Chartservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Countservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Countservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Countservlet</servlet-name>
+    <url-pattern>/Servlet/Countservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Resultservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Resultservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resultservlet</servlet-name>
+    <url-pattern>/Servlet/Resultservlet</url-pattern>
+  </servlet-mapping>
+</web-app>

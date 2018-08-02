@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/vegehome.css">
+    <link rel="stylesheet" href="css/shutter.css">
+    <title>智慧菜市云平台</title>
+    <script type="text/javascript" src="js/jquery.js"></script> -
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.6&key=0f725c13d51ff337bba15656045c80b4"></script>
+    <script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/superslide.2.1.js"></script>
+    <script src="js/radialIndicator.js"></script>
+</head>
+<body>
+<div id="title">
+    <img src="img/智慧菜市云-logo.png" alt="智慧菜市云平台" class="title-img">
+</div>
+<nav>
+    <img src="img/nav.png" class="title-nav" style="height: 120px">
+    <p style="margin-left: 1065px;" class="nav-text"><a href="#" style="color: #fff54e">首页</a></p>
+    <div class="line" ></div>
+    <p class="nav-text"><a href="">查询</a></p>
+    <div class="line"></div>
+    <p class="nav-text"><a href="">统计</a></p>
+    <div class="line" ></div>
+    <p class="nav-text"><a href="" >分析</a></p>
+    <div class="line"></div>
+    <p class="nav-text"><a href="">关于</a></p>
+    <div class="line"></div>
+</nav>
+<div class="fullSlide">
+    <div class="bd">
+        <ul>
+            <li _src="url(img/轮播图片1.png)" style="background:#E2025E center 0 no-repeat;"><a href="#"></a></li>
+            <li _src="url(img/banner1.png)" style="background:#DED5A1 center 0 no-repeat;"><a href="#"></a></li>
+            <li _src="url(img/banner2.png)" style="background:#B8CED1 center 0 no-repeat;"><a href="#"></a></li>
+
+        </ul>
+    </div>
+    <div class="hd"><ul></ul></div>
+    <span class="prev"></span>
+    <span class="next"></span>
+</div><!--fullSlide end-->
+<div id="data-img">
+    <div class="data-img">
+        <img src="img/边框.png">
+        <p style="position: absolute;top: 63px;left: 53px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">全年抽检批次</p>
+        <img src="img/指示线条.png" class="line-position">
+        <div id="indicatorContainer" class="indicator"></div>
+    </div>
+    <div class="data-img">
+        <img src="img/边框.png">
+        <p style="position: absolute;top: 63px;left: 53px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">全年抽检合格率</p>
+        <img src="img/指示线条.png" class="line-position">
+        <div id="indicatorContainer2" class="indicator"></div>
+    </div>
+    <div class="data-img">
+        <img src="img/边框.png">
+        <p style="position: absolute;top: 168px;left: 234px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">敬请期待 ...</p>
+    </div>
+</div>
+<div id="map">
+    <img src="img/矩形%205%20拷贝%204.png" class="border">
+    <img src="img/左边.png" style="top:220px;left:18px ;z-index: 1001">
+    <img src="img/右边.png" style="top:220px;left:1188px ;z-index: 1001">
+    <img src="img/左上角.png" style="top:8px;left:19px;z-index: 1001">
+    <div id="left-map">
+        <img src="img/滑动栏.png" class="hd-img" >
+        <div id="map-introduce" style="position: absolute;top:0;background-color: rgba(18,19,49,0.67);border-left:2px solid  #053b7b;z-index: 1000">
+            <ul id="myList">
+
+            </ul>
+        </div>
+        <img src="img/区域下拉菜单.png" class="select-img">
+        <form method="get">
+            <select name="food-market" id="food-market">
+                <option value="1" selected="selected">青羊区</option>
+                <option value="2">武侯区</option>
+                <option value="3">金牛区</option>
+                <option value="4">锦江区</option>
+                <option value="5">成华区</option>
+                <option value="6">双流区</option>
+            </select>
+        </form>
+    </div>
+    <img src="img/表格背景.png" class="excel-img">
+    <div id="excel">
+        <table id="excel-data">
+            <tr>
+                <th>经营户</th>
+                <th>样品名称</th>
+                <th>检测指标</th>
+                <th>检测结论</th>
+            </tr>
+        </table>
+    </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript">
+    var Market = "益民菜市(长顺街店)";
+    var Year = (new Date()).getFullYear();
+    var Month = (new Date()).getMonth();
+    var Days = (new Date()).getDate();
+    $(document).ready(function () {
+        $(".hd-img").click(function(){
+            if ($("#map-introduce").css("right")=="0px") {
+                $("#map-introduce").removeClass("map-flash");
+                $("#map-introduce").addClass("close-flash");
+                $(".hd-img").removeClass("but-open");
+                $(".hd-img").addClass("but-close");
+            }
+            else if($("#map-introduce").css("right")=="-350px"){
+                $("#map-introduce").removeClass("close-flash");
+                $("#map-introduce").addClass("map-flash");
+                $(".hd-img").removeClass("but-close");
+                $(".hd-img").addClass("but-open");
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(".fullSlide").hover(function(){
+            $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function(){
+            $(this).find(".prev,.next").fadeOut()
+        });
+    $(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click",
+        startFun: function(i) {
+            var curLi = jQuery(".fullSlide .bd li").eq(i);
+            if ( !! curLi.attr("_src")) {
+                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+            }
+        }
+    });
+    $('#indicatorContainer').radialIndicator({
+        barColor:  {
+            0: '#FF0000',
+            33: '#ff8308',
+            66: '#f9ea00',
+            100: '#33CC33'
+        },
+        radius:120,
+        minValue: 0,
+        maxValue: 10000,
+        barBgColor:'#2e42a1',
+        barWidth: 12,
+        initValue: 0,
+        roundCorner : true,
+        displayNumber:true
+    });
+    $('#indicatorContainer2').radialIndicator({
+        barColor:  {
+            0: '#FF0000',
+            33: '#ff8308',
+            66: '#f9ea00',
+            100: '#33CC33'
+        },
+        barBgColor:'#2e42a1',
+        radius:120,
+        barWidth: 12,
+        initValue: 0,
+        roundCorner : true,
+        percentage: true
+    });
+    var radialObj = $('#indicatorContainer').data('radialIndicator');
+    var radialObj2 = $('#indicatorContainer2').data('radialIndicator');
+    function action(data){
+        radialObj.animate(data);
+    }
+    function action2(data){
+        radialObj2.animate(data);
+    }
+    window.onload = function(){
+        //异步加载2018年到现在为止的所有快检数据总量
+        $.ajax({
+            type:"GET",
+            url:"Countservlet",
+            data:{
+                "year":Year
+            },
+            async:true,
+            dataType:"json",
+            success:function (data) {
+            	console.log("countdata",data);
+                setTimeout(function () {
+                    action(data[0].count)
+                }, 500);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            url:"Resultservlet",
+            data:{
+                "year":Year
+            },
+            async:true,
+            dataType:"json",
+            success:function (data) {
+            	console.log("resultdata",data);
+                setTimeout(function () {
+                    action2(data[0].result)
+                }, 500);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            url:"Testservlet",
+            data:{
+                "year":Year,
+                "month":Month,
+                "days":Days
+            },
+            async:true,
+            dataType:"json",
+            success:function (data) {
+            	console.log("date",Year+":"+Month+":"+Days)
+                console.log("jsondatta",data);
+                var item;
+                $.each(data,function (i,n) {
+                    item = "<tr><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td></tr>";
+                    $("#excel-data").append(item);
+                })
+            }
+        });
+    }
+</script>
+<script type="text/javascript">//智慧菜市云地图模块
+    var map = new AMap.Map('left-map',{
+        zoom:9,
+        mapStyle: 'amap://styles/001cb3a6627a402517f9aaba68e639ea'
+    });
+    //加载MarkerList，loadUI的路径参数为模块名中 'ui/' 之后的部分
+    AMapUI.loadUI(['misc/MarkerList','overlay/SimpleMarker'], function(MarkerList,SimpleMarker) {
+        //启动页面
+        initPage(MarkerList,SimpleMarker);
+    });
+    AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Geolocation'],function(){//异步加载插件
+        var ToolBar = new AMap.ToolBar({
+            offset: new AMap.Pixel(10,35),
+            position:'LT'
+        });
+        map.addControl(ToolBar);
+        map.addControl(new AMap.Scale());
+       // map.addControl(new AMap.OverView({isOpen:true}));
+        var Geolocation = new AMap.Geolocation({
+            buttonPosition:'LB',
+            buttonOffset: new AMap.Pixel(10, 50)
+        });
+        map.addControl(Geolocation);
+    });
+
+    function initPage(MarkerList,SimpleMarker) {
+        //创建一个实例
+        var markerList = new MarkerList({
+            map: map, //关联的map对象
+            listContainer: 'myList', //列表的dom容器的节点或者id, 用于放置getListElement返回的内容
+            getDataId: function(dataItem, index) {
+                //返回数据项的Id
+                return dataItem.id;
+            },
+            getPosition: function(dataItem) {
+                //返回数据项的经纬度，AMap.LngLat实例或者经纬度数组
+                return dataItem.position;
+            },
+            getMarker: function(dataItem, context, recycledMarker) {
+                var label = String.fromCharCode('1'.charCodeAt(0) + context.index);
+
+                /* if (recycledMarker) {
+                     //存在可回收利用的marker,直接setLabel返回
+                     recycledMarker.setLabel(label);
+                     return recycledMarker;
+                 }
+                 //返回一个新的Marker
+                /*return new AMap.Marker({
+                     label: label
+                 });*/
+                return new SimpleMarker({
+                    iconTheme: 'fresh',
+                    //背景图标样式
+                    iconStyle: 'lightgreen',
+                    iconLabel: {
+                        innerHTML:label,
+                        style: {
+                            color: '#ff29c0'
+                        } //设置文字颜色
+                    },
+                    offset: new AMap.Pixel(16, 18)
+                });
+            },
+            getInfoWindow: function(dataItem, context, recycledInfoWindow) {
+                var tpl = '<p class="my-btn1"><%- dataItem.id %>：<%- dataItem.desc %></p><div class="bottom-link"></div><p class="address1">地址：<%- dataItem.address %></p>';
+                //MarkerList.utils.template支持underscore语法的模板
+                var content = MarkerList.utils.template(tpl, {
+                    dataItem: dataItem,
+                    dataIndex: context.index
+                });
+                if (recycledInfoWindow) {
+                    //存在可回收利用的infoWindow, 直接setContent返回
+                    recycledInfoWindow.setContent(content);
+                    return recycledInfoWindow;
+                }
+                //返回一个新的InfoWindow
+                return new AMap.InfoWindow({
+                    offset: new AMap.Pixel(0, -23),
+                    content: content
+                });
+            },
+            getListElement: function(dataItem, context, recycledListElement) {
+                var tpl = '<p class="my-btn2"><%- dataItem.id %>：<%- dataItem.desc %></p><p class="address2">地址：<%- dataItem.address %></p><div class="bottom-link"></div>';
+                var content = MarkerList.utils.template(tpl, {
+                    dataItem: dataItem,
+                    dataIndex: context.index
+                });
+                if (recycledListElement) {
+                    //存在可回收利用的listElement, 直接更新内容返回
+                    recycledListElement.innerHTML = content;
+                    return recycledListElement;
+                }
+                //返回一段html，MarkerList将利用此html构建一个新的dom节点
+                return '<li class="li-hover">' + content + '</li>';
+            }
+        });
+        //监听选中改变
+        markerList.on('selectedChanged', function(event, info) {
+        });
+        //监听Marker和ListElement上的点击，详见markerEvents，listElementEvents
+        markerList.on('markerClick listElementClick', function(event, record) {
+            Market = record.data.desc;
+        });
+        //利用ajax初始化数据
+        $.ajax({
+            type:"GET",
+            url:"js/market.json",
+            success:function (data) {
+                markerList.render(data.market1);
+            }
+        });
+        //构建数据源，数据项本身没有格式要求，但需要支持getDataId和getPosition
+        $("#food-market").change(function () {
+            var marketindex = $("#food-market option:selected").val();
+            //绘制数据源，Let's go!
+            $.ajax({
+                type:"GET",
+                url:"js/market.json",
+                success:function (data) {
+                    if(marketindex == 1){
+                        markerList.render(data.market1);
+                    }
+                    else if(marketindex == 2){
+                        markerList.render(data.market2);
+                    }
+                    else if (marketindex == 3){
+                        markerList.render(data.market3);
+                    }
+                    else if(marketindex == 4){
+                        markerList.render(data.market4);
+                    }
+                    else if (marketindex == 5){
+                        markerList.render(data.market5);
+                    }
+                    else if (marketindex == 6){
+                        markerList.render(data.market6);
+                    }
+                }
+            });
+
+        });
+        //清除数据
+        //markerList.render([]);
+    }
+</script>
+</body>
+</html>
