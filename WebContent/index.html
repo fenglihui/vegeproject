@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/vegehome.css">
     <link rel="stylesheet" href="css/shutter.css">
     <title>智慧菜市云平台</title>
-    <script type="text/javascript" src="js/jquery.js"></script> -
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.6&key=0f725c13d51ff337bba15656045c80b4"></script>
     <script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
@@ -21,11 +21,11 @@
 </div>
 <nav>
     <img src="img/nav.png" class="title-nav" style="height: 120px">
-    <p style="margin-left: 1065px;" class="nav-text"><a href="#" style="color: #fff54e">首页</a></p>
+    <p style="margin-left: 1065px;" class="nav-text"><a href="index.html" style="color: #fff54e">首页</a></p>
     <div class="line" ></div>
-    <p class="nav-text"><a href="">查询</a></p>
+    <p class="nav-text"><a href="search.html">查询</a></p>
     <div class="line"></div>
-    <p class="nav-text"><a href="">统计</a></p>
+    <p class="nav-text"><a href="statistics.html">统计</a></p>
     <div class="line" ></div>
     <p class="nav-text"><a href="" >分析</a></p>
     <div class="line"></div>
@@ -100,10 +100,13 @@
     </div>
     <div class="clear"></div>
 </div>
+<footer style="width:100%;min-width:1800px;height:60px;line-height:60px;margin-top: 80px;background-color: #000000;color: #FFFFFF;text-align:center;font-size: 18px">
+    <a href="http://www.miitbeian.gov.cn" style="color: #FFFFFF;text-decoration: none">备案/许可证编号：蜀ICP备18023143号</a>
+</footer>
 <script type="text/javascript">
     var Market = "益民菜市(长顺街店)";
     var Year = (new Date()).getFullYear();
-    var Month = (new Date()).getMonth();
+    var Month = (new Date()).getMonth()+1;
     var Days = (new Date()).getDate();
     $(document).ready(function () {
         $(".hd-img").click(function(){

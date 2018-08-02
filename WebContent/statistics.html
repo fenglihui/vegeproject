@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/vegehome.css">
+    <link rel="stylesheet" type="text/css" href="css/statistics.css">
+    <title>数据统计</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/select.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+</head>
+<body>
+<div id="title">
+    <img src="img/智慧菜市云-logo.png" alt="智慧菜市云平台" class="title-img">
+</div>
+<nav>
+    <img src="img/nav.png" class="title-nav" style="height: 120px">
+    <p style="margin-left: 1065px;" class="nav-text"><a href="#" style="color: #fff54e">首页</a></p>
+    <div class="line" ></div>
+    <p class="nav-text"><a href="search.html">查询</a></p>
+    <div class="line"></div>
+    <p class="nav-text"><a href="statistics.html">统计</a></p>
+    <div class="line" ></div>
+    <p class="nav-text"><a href="" >分析</a></p>
+    <div class="line"></div>
+    <p class="nav-text"><a href="">关于</a></p>
+    <div class="line"></div>
+</nav>
+<div id="cover">
+    <div id="select-city">
+        <form method="get" id="chartsform">
+            <select name="administrative" id="administrative" >
+                <option value="1" selected="selected">青羊区</option>
+                <option value="2">武侯区</option>
+                <option value="3">金牛区</option>
+                <option value="4">锦江区</option>
+                <option value="5">成华区</option>
+                <option value="6">双流区</option>
+            </select>
+            <select name="year" id="year">
+                <option value="2018" selected="selected">2018年</option>
+            </select>
+            <button id="submit">提交</button>
+        </form>
+    </div>
+    <p id="count-title" class="title-color">全年快检批次统计图</p>
+    <div id="count-data"></div>
+    <p id="result-title" class="title-color">全年快检合格率统计图</p>
+    <div id="result-data"></div>
+</div>
+<script type="text/javascript">
+    var Year = (new Date()).getFullYear();
+    $(function(){
+        $("#date").selectDate()
+
+        $("#days").focusout(function(){
+            var Year = $("#year option:selected").html()
+    })
+
+    })
+</script>
+<script type="text/javascript">
+    var jsondata = new Array();
+    var dom = document.getElementById("count-data");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    app.title = '全年快检批次统计图';
+
+    var colors = ['#c9d8ef'];
+
+    option = {
+        color: colors,
+
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        grid: {
+            right: '20%'
+        },
+        toolbox: {
+            feature: {
+                dataView: {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                magicType: {
+                    type:['line','bar'],
+                    show:true
+                },
+                restore: {show: true},//配置项还原。
+                saveAsImage: {show: true},//保存为图片。
+            }
+        },
+        legend: {
+            data:['快检数据量']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '快检数据量',
+                min: 0,
+                max: 1000,
+                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value} 次'
+                }
+            }],
+        series: []
+    };
+    myChart.setOption(option, true);
+    myChart.showLoading();
+    $.ajax({
+        type:"GET",
+        url:"Chartservlet",
+        dataType:"json",
+        success:function (data) {
+            $.each(data,function (i,n) {
+                jsondata.push(n.total);
+            });
+            myChart.hideLoading();
+            myChart.setOption({
+                series:[{
+                    "name":"快检数据量",
+                    "type":"bar",
+                    "data":jsondata
+                }]
+            });
+        }
+    });
+</script>
+</body>
+</html>
