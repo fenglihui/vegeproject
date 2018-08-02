@@ -79,6 +79,7 @@
 
     option = {
         color: colors,
+        backgroundColor:'',
 
         tooltip: {
             trigger: 'axis',
@@ -87,9 +88,10 @@
             }
         },
         grid: {
-            right: '20%'
+            right: '11%'
         },
         toolbox: {
+            right:'170px',
             feature: {
                 dataView: {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
                 magicType: {
@@ -108,6 +110,11 @@
                 type: 'category',
                 axisTick: {
                     alignWithLabel: true
+                },
+                axisLine:{
+                    lineStyle:{
+                        color:colors[0]
+                    }
                 },
                 data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
             }
@@ -131,7 +138,12 @@
         series: []
     };
     myChart.setOption(option, true);
-    myChart.showLoading();
+    myChart.showLoading({
+        text:'数据正在加载...',
+        color:'rgb(255,255,255)',
+        textColor:'rgb(255,255,255)',
+        maskColor:'rgba(255,255,255,0)',
+    });
     $.ajax({
         type:"GET",
         url:"Chartservlet",
@@ -146,6 +158,102 @@
                     "name":"快检数据量",
                     "type":"bar",
                     "data":jsondata
+                }]
+            });
+        }
+    });
+</script>
+<script type="text/javascript">
+    var jsondata2 = new Array();
+    var dom2 = document.getElementById("result-data");
+    var myChart2 = echarts.init(dom2);
+    var app2 = {};
+    option2 = null;
+    app2.title = '全年快检合格率统计图';
+
+    var colors2 = ['#c9d8ef'];
+
+    option2 = {
+        color: colors2,
+        backgroundColor:'',
+
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        grid: {
+            right: '11%'
+        },
+        toolbox: {
+            right:'170px',
+            feature: {
+                dataView: {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                magicType: {
+                    type:['line','bar'],
+                    show:true
+                },
+                restore: {show: true},//配置项还原。
+                saveAsImage: {show: true},//保存为图片。
+            }
+        },
+        legend: {
+            data:['合格率']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine:{
+                    lineStyle:{
+                        color:colors2[0]
+                    }
+                },
+                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '合格率',
+                min: 0,
+                max: 100,
+                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: colors2[0]
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value} %'
+                }
+            }],
+        series: []
+    };
+    myChart2.setOption(option2, true);
+    myChart2.showLoading({
+        text:'数据正在加载...',
+        color:'rgb(255,255,255)',
+        textColor:'rgb(255,255,255)',
+        maskColor:'rgba(255,255,255,0)',
+    });
+    $.ajax({
+        type:"GET",
+        url:"Chartservlet",
+        dataType:"json",
+        success:function (data) {
+            $.each(data,function (i,n) {
+                jsondata2.push(n.total);
+            });
+            myChart2.hideLoading();
+            myChart2.setOption({
+                series:[{
+                    "name":"合格率",
+                    "type":"bar",
+                    "data":jsondata2
                 }]
             });
         }

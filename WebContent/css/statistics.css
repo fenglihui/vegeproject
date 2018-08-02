@@ -45,4 +45,10 @@ select option{
 #count-data{
     width: 1800px;
     height: 800px;
+    margin:40px auto;
+}
+#result-data{
+    width: 1800px;
+    height: 800px;
+    margin: 40px auto;
 }
