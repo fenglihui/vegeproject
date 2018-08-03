@@ -9,6 +9,7 @@ public class User {
 	private String name;
 	private String location;
 	private String channels;
+	private String result;
 	public String getYear() {
 		return year;
 	}
@@ -57,6 +58,11 @@ public class User {
 	public void setChannels(String channels) {
 		this.channels=channels;
 	}
-	
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result=result;
+	}
 }
 

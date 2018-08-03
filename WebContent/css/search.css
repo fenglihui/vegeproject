@@ -36,17 +36,15 @@ select option{
     margin-left: 150px;
 }
 #table{
-    width: 1530px;
+    height:640px;
     margin: 0 auto;
     position: relative;
+    overflow-y:auto;
 }
 #table-title{
-    width: 100%;
-    position: absolute;
-    top:-44px;
-    left: 0;
+	width: 1530px;
+    margin: 0 auto 0 137px;
     background: #293954;
-    z-index: 1009;
 }
 #table-title th{
     width: 190px;
@@ -57,12 +55,10 @@ select option{
     border: 1px solid #bebebe;
 }
 #table-data{
-    width: 100%;
-    margin-top: 44px;
     position: relative;
     z-index: 1000;
-    height: 600px;
     border: none;
+    margin-left: 134px;
 }
 #table-data td{
     width: 190px;

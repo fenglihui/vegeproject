@@ -20,9 +20,9 @@
     <div class="line"></div>
     <p class="nav-text"><a href="statistics.html">统计</a></p>
     <div class="line" ></div>
-    <p class="nav-text"><a href="" >分析</a></p>
+    <p class="nav-text"><a href="analyze.html" >分析</a></p>
     <div class="line"></div>
-    <p class="nav-text"><a href="">关于</a></p>
+    <p class="nav-text"><a href="about.html">关于</a></p>
     <div class="line"></div>
 </nav>
 <div id="cover">
@@ -43,14 +43,13 @@
                 <option value="1" selected="selected">01月</option>
             </select>
             <select name="result" id="result">
-                <option value="合格" selected="selected">合格</option>
+                <option value="合格"selected="selected">合格</option>
                 <option value="不合格">不合格</option>
             </select>
             <button type="button" id="submit">提交</button>
         </form>
     </div>
-    <div id="table">
-        <table border="1" id="table-title" cellspacing="0" cellpadding="0">
+    <table border="1" id="table-title" cellspacing="0" cellpadding="0">
             <tr>
                 <th>样品编号</th>
                 <th>经营户</th>
@@ -61,11 +60,13 @@
                 <th>检测结论</th>
                 <th>检测时间</th>
             </tr>
-        </table>
+    </table>
+    <div id="table">
         <table border="1" id="table-data" cellspacing="0" cellpadding="0">
 
         </table>
     </div>
+    <div style="position:absolute;top:0;right:0;width:30px;height:800px;background:#040E3A"></div>
 </div>
 <script type="text/javascript">//渲染日期模块
 var Year = $("#year option:selected").val();
@@ -73,33 +74,42 @@ var Month = $("#month option:selected").val();
 var Result = $("#result option:selected").val();
 $(function(){
     $("#date").selectDate();
-    $.ajax({
-        type:"GET",
-        url:"Testservlet",
-        data:{
-            "year":Year,
-            "month":Month,
-            "result":Result
-        },
-        async:true,
-        dataType:"json",
-        success:function (data) {
-            console.log("jsondatta",data);
-            var item;
-            $.each(data,function (i,n) {
-                if (i%2==0){
-                    $("#table-data td").addClass("background-b");
-                }
-                else{
-                    $("#table-data td").addClass("background-w");
-                }
-                item = "<tr><td>" + i + "</td><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.location + "</td><td>" +
-                    n.channels + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td><td>"+ n.testtm+"</td></tr>";
-                $("#excel-data").append(item);
-            })
-        }
+    $("#submit").click(function(){
+    	Year = $("#year option:selected").val();
+    	Month = $("#month option:selected").val();
+    	Result = $("#result option:selected").val();
+    	$("#table-data").empty();
+    	$.ajax({
+            type:"GET",
+            url:"Dataservlet",
+            data:{
+                "year":Year,
+                "month":Month,
+                "result":Result
+            },
+            async:true,
+            dataType:"json",
+            success:function (data) {
+                console.log("jsondata",data);
+                var item;
+                var id;
+                $.each(data,function (i,n) {
+                	id=i+1;
+                    if(i%2==0){
+                    	item = "<tr><td class='background-b'>" + id + "</td><td class='background-b'>" + n.manage + "</td><td class='background-b'>"+ n.sampname + "</td><td class='background-b'>"+ n.location + "</td><td class='background-b'>" +
+                        n.channels + "</td><td class='background-b'>"+ n.testidx + "</td><td class='background-b'>"+ n.result + "</td><td class='background-b'>"+ n.days+"日"+"</td></tr>";
+                    }                  
+                    else{
+                    	item = "<tr><td class='background-w'>" + id + "</td><td class='background-w'>" + n.manage + "</td><td class='background-w'>"+ n.sampname + "</td><td class='background-w'>"+ n.location + "</td><td class='background-w'>" +
+                        n.channels + "</td><td class='background-w'>"+ n.testidx + "</td><td class='background-w'>"+ n.result + "</td><td class='background-w'>"+ n.days+"日"+"</td></tr>";
+                    }
+                    $("#table-data").append(item);
+                   
+                })
+            }
+        });
     });
-})
+});
 </script>
 </body>
 </html>

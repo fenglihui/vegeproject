@@ -1,0 +1,17 @@
+#analyze-text{
+    width: 1500px;
+    margin: 50px auto;
+}#analyze-img{
+     width: 1500px;
+     margin: 0 auto;
+ }
+#analyze-text p{
+    color: #14a2f8;
+    font-size: 16px;
+    font-family:"Microsoft YaHei" ;
+    text-align: left;
+    letter-spacing: 0.1em;
+}
+#analyze-text span{
+    color: #fff54e;
+}

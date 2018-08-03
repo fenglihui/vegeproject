@@ -1,0 +1,11 @@
+#about-text{
+    width: 1300px;
+    margin: 0 auto;
+}
+#about-text p{
+    letter-spacing: 0.2em;
+    color: #14a2f8;
+    font-size: 16px;
+    line-height: 1.8em;
+    font-family:"Microsoft YaHei" ;
+}

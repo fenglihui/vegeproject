@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/vegehome.css">
+    <link rel="stylesheet" type="text/css" href="css/statistics.css">
     <title>数据统计</title>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/select.js"></script>
@@ -28,7 +29,7 @@
     <div class="line"></div>
     <p class="nav-text"><a href="statistics.html">统计</a></p>
     <div class="line" ></div>
-    <p class="nav-text"><a href="" >分析</a></p>
+    <p class="nav-text"><a href="analyze.html" >分析</a></p>
     <div class="line"></div>
     <p class="nav-text"><a href="">关于</a></p>
     <div class="line"></div>
@@ -47,10 +48,7 @@
             <select name="year" id="year">
                 <option value="2018" selected="selected">2018年</option>
             </select>
-            <select name="month" id="month" >
-                <option value="1" selected="selected">01月</option>
-            </select>
-            <button id="submit">提交</button>
+            <button type="button" id="submit">提交</button>
         </form>
     </div>
     <p id="count-title" class="title-color">全年快检批次统计图</p>
@@ -62,11 +60,6 @@
     var Year = (new Date()).getFullYear();
     $(function(){
         $("#date").selectDate()
-
-        $("#days").focusout(function(){
-            var Year = $("#year option:selected").html()
-    })
-
     })
 </script>
 <script type="text/javascript">
@@ -81,7 +74,6 @@
 
     option = {
         color: colors,
-        backgroundColor:'',
 
         tooltip: {
             trigger: 'axis',
@@ -105,6 +97,9 @@
             }
         },
         legend: {
+            textStyle:{
+                color:'#c9d8ef'
+            },
             data:['快检数据量']
         },
         xAxis: [
@@ -201,6 +196,9 @@
             }
         },
         legend: {
+            textStyle:{
+                color:'#c9d8ef'
+            },
             data:['合格率']
         },
         xAxis: [

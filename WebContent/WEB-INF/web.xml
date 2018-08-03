@@ -41,4 +41,12 @@
     <servlet-name>Resultservlet</servlet-name>
     <url-pattern>/Servlet/Resultservlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Dataservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Dataservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Dataservlet</servlet-name>
+    <url-pattern>/Servlet/Dataservlet</url-pattern>
+  </servlet-mapping>
 </web-app>
