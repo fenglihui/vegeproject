@@ -73,8 +73,18 @@ public class Dataservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="select manage,sampname,location,channels,testidx,result,day(testtm) as days from testtb where YEAR(testtm)='"+user.getYear()+"' and MONTH(testtm)='"+user.getMonth()+"' and result='"+ user.getResult() +"' ORDER BY testtm";
+			String sql="select manage,sampname,location,channels,testidx,result,YEAR(testtm) as year,MONTH(testtm) as month,DAY(testtm) as days from testtb where YEAR(testtm)='"+user.getYear()+"' and MONTH(testtm)='"+user.getMonth()+"' and result='"+ user.getResult() +"' ORDER BY testtm";
 			rs = stmt.executeQuery(sql);
+			List list = new ArrayList();
+		/*	while(rs.next()) {
+				String manage = rs.getString("manage");
+				String sampname = rs.getString("sampname");
+				String location = rs.getString("location");
+				String channels = rs.getString("channels");
+				String testidx = rs.getString("testidx");
+				float result = rs.getFloat("result");
+				Date testtm = ()rs.getDate(6);
+			}*/
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
 			System.out.println(jsonData.toString());
 			out.print(jsonData);

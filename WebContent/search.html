@@ -97,11 +97,11 @@ $(function(){
                 	id=i+1;
                     if(i%2==0){
                     	item = "<tr><td class='background-b'>" + id + "</td><td class='background-b'>" + n.manage + "</td><td class='background-b'>"+ n.sampname + "</td><td class='background-b'>"+ n.location + "</td><td class='background-b'>" +
-                        n.channels + "</td><td class='background-b'>"+ n.testidx + "</td><td class='background-b'>"+ n.result + "</td><td class='background-b'>"+ n.days+"日"+"</td></tr>";
+                        n.channels + "</td><td class='background-b'>"+ n.testidx + "</td><td class='background-b'>"+ n.result + "</td><td class='background-b'>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
                     }                  
                     else{
                     	item = "<tr><td class='background-w'>" + id + "</td><td class='background-w'>" + n.manage + "</td><td class='background-w'>"+ n.sampname + "</td><td class='background-w'>"+ n.location + "</td><td class='background-w'>" +
-                        n.channels + "</td><td class='background-w'>"+ n.testidx + "</td><td class='background-w'>"+ n.result + "</td><td class='background-w'>"+ n.days+"日"+"</td></tr>";
+                        n.channels + "</td><td class='background-w'>"+ n.testidx + "</td><td class='background-w'>"+ n.result + "</td><td class='background-w'>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
                     }
                     $("#table-data").append(item);
                    
