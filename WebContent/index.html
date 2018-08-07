@@ -88,15 +88,22 @@
         </form>
     </div>
     <img src="img/表格背景.png" class="excel-img">
+    <table id="excel-data">
+        <tr>
+            <th>经营户</th>
+            <th>样品名称</th>
+            <th>检测指标</th>
+            <th>检测结论</th>
+            <th>检测时间</th>
+        </tr>
+    </table>
     <div id="excel">
-        <table id="excel-data">
-            <tr>
-                <th>经营户</th>
-                <th>样品名称</th>
-                <th>检测指标</th>
-                <th>检测结论</th>
-            </tr>
+        <table id="excel-td">
+
         </table>
+    </div>
+    <div id="excel-border">
+
     </div>
     <div class="clear"></div>
 </div>
@@ -190,7 +197,8 @@
             type:"GET",
             url:"Countservlet",
             data:{
-                "year":Year
+                "year":Year,
+                "market":Market
             },
             async:true,
             dataType:"json",
@@ -205,7 +213,8 @@
             type:"GET",
             url:"Resultservlet",
             data:{
-                "year":Year
+                "year":Year,
+                "market":Market
             },
             async:true,
             dataType:"json",
@@ -222,23 +231,78 @@
             data:{
                 "year":Year,
                 "month":Month,
-                "days":Days
+                "days":Days,
+                "market":Market
             },
             async:true,
             dataType:"json",
             success:function (data) {
-            	console.log("date",Year+":"+Month+":"+Days)
                 console.log("jsondatta",data);
                 var item;
                 $.each(data,function (i,n) {
-                    item = "<tr><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td></tr>";
-                    $("#excel-data").append(item);
+                    item = "<tr><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td><td>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
+                    $("#excel-td").append(item);
                 })
             }
         });
     }
 </script>
 <script type="text/javascript">//智慧菜市云地图模块
+function excelmap() {
+    $("#excel-td").empty();
+    $.ajax({
+        type:"GET",
+        url:"Testservlet",
+        data:{
+            "year":Year,
+            "month":Month,
+            "days":Days,
+            "market":Market
+        },
+        async:true,
+        dataType:"json",
+        success:function (data) {
+            console.log("jsondatta",data);
+            var item;
+            $.each(data,function (i,n) {
+                item = "<tr><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td><td>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
+                $("#excel-td").append(item);
+            })
+        }
+    });
+    $.ajax({
+        type:"GET",
+        url:"Countservlet",
+        data:{
+            "year":Year,
+            "market":Market
+        },
+        async:true,
+        dataType:"json",
+        success:function (data) {
+        	console.log("countdata",data);
+            setTimeout(function () {
+                action(data[0].count)
+            }, 500);
+        }
+    });
+    $.ajax({
+        type:"GET",
+        url:"Resultservlet",
+        data:{
+            "year":Year,
+            "market":Market
+        },
+        async:true,
+        dataType:"json",
+        success:function (data) {
+        	console.log("resultdata",data);
+            setTimeout(function () {
+                action2(data[0].result)
+            }, 500);
+        }
+    });
+}
     var map = new AMap.Map('left-map',{
         zoom:9,
         mapStyle: 'amap://styles/001cb3a6627a402517f9aaba68e639ea'
@@ -340,6 +404,7 @@
         //监听Marker和ListElement上的点击，详见markerEvents，listElementEvents
         markerList.on('markerClick listElementClick', function(event, record) {
             Market = record.data.desc;
+            excelmap();
         });
         //利用ajax初始化数据
         $.ajax({

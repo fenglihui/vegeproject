@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/statistics.css">
     <title>数据统计</title>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/select.js"></script>
+    <script type="text/javascript" src="js/select2.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -37,13 +37,15 @@
 <div id="cover">
     <div id="select-city">
         <form method="get" id="chartsform">
-            <select name="administrative" id="administrative" >
+            <select name="administrative" id="administrative" onchange="changemarket()" >
                 <option value="1" selected="selected">青羊区</option>
                 <option value="2">武侯区</option>
                 <option value="3">金牛区</option>
                 <option value="4">锦江区</option>
                 <option value="5">成华区</option>
                 <option value="6">双流区</option>
+            </select>
+            <select name="market" id="market">
             </select>
             <select name="year" id="year">
                 <option value="2018" selected="selected">2018年</option>
@@ -57,9 +59,84 @@
     <div id="result-data"></div>
 </div>
 <script type="text/javascript">
+    var Market = "益民菜市(长顺街店)"
+    window.onload=function () {
+        $.ajax({
+            type:"GET",
+            url:"js/market.json",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                console.log(Market);
+                console.log(data.market1);
+                var mark;
+                if ($("#administrative option:selected").val()==1) {
+                    $.each(data.market1,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+            }
+        });
+    }
+    function changemarket() {
+        $.ajax({
+            type:"GET",
+            url:"js/market.json",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                console.log(data.market1);
+                $("#market").empty();
+                var mark;
+                if ($("#administrative option:selected").val()==1) {
+                    $.each(data.market1,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==2) {
+                    $.each(data.market2,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==3) {
+                    $.each(data.market3,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==4) {
+                    $.each(data.market4,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==5) {
+                    $.each(data.market5,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==6) {
+                    $.each(data.market6,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
     var Year = (new Date()).getFullYear();
+    //var Market = "益民菜市(长顺街店)";
     $(function(){
-        $("#date").selectDate()
+        $("#date").selectDate();
+        $("#submit").click(function () {
+            viewcharts();
+        });
     })
 </script>
 <script type="text/javascript">
@@ -144,6 +221,10 @@
     $.ajax({
         type:"GET",
         url:"Chartservlet",
+        data:{
+          "year":Year,
+          "market":Market
+        },
         dataType:"json",
         success:function (data) {
             $.each(data,function (i,n) {
@@ -242,11 +323,15 @@
     });
     $.ajax({
         type:"GET",
-        url:"Chartservlet",
+        url:"ChartRSservlet",
+        data:{
+            "year":Year,
+            "market":Market
+        },
         dataType:"json",
         success:function (data) {
             $.each(data,function (i,n) {
-                jsondata2.push(n.total);
+                jsondata2.push(n.result);
             });
             myChart2.hideLoading();
             myChart2.setOption({
@@ -258,6 +343,65 @@
             });
         }
     });
+</script>
+<script type="text/javascript">
+    function viewcharts() {
+    	jsondata = new Array();
+    	jsondata2 = new Array();
+        Year = $("#year option:selected").val();
+        Market = $("#market option:selected").val();
+        myChart.setOption({
+            series:[]
+        });
+        $.ajax({
+            type:"GET",
+            url:"Chartservlet",
+            data:{
+                "year":Year,
+                "market":Market
+            },
+            dataType:"json",
+            success:function (data) {
+                $.each(data,function (i,n) {
+                    jsondata.push(n.total);
+                });
+                console.log("chartsdata",jsondata);
+                myChart.hideLoading();
+                myChart.setOption({
+                    series:[{
+                        "name":"快检数据量",
+                        "type":"bar",
+                        "data":jsondata
+                    }]
+                });
+            }
+        });
+        myChart2.setOption({
+            series:[]
+        });
+        $.ajax({
+            type:"GET",
+            url:"ChartRSservlet",
+            data:{
+                "year":Year,
+                "market":Market
+            },
+            dataType:"json",
+            success:function (data) {
+                $.each(data,function (i,n) {
+                    jsondata2.push(n.result);
+                });
+                myChart2.hideLoading();
+                myChart2.setOption({
+                    series:[{
+                        "name":"合格率",
+                        "type":"bar",
+                        "data":jsondata2
+                    }]
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>

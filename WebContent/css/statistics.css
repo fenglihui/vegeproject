@@ -16,13 +16,16 @@ select{
     text-align: center;
     width: auto;
     height: 40px;
-    padding: 0 84px;
+    padding: 0 44px;
 }
 select option{
     text-align: center;
 }
 #administrative{
-    margin-left: 395px;
+    margin-left:255px;
+}
+#market{
+    margin-left:138px ;
 }
 #year{
     margin-left: 138px;

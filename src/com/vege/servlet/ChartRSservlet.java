@@ -24,16 +24,16 @@ import com.vege.information.User;
 import net.sf.json.JSONArray;
 
 /**
- * Servlet implementation class Countservlet
+ * Servlet implementation class ChartRSservlet
  */
-@WebServlet("/Countservlet")
-public class Countservlet extends HttpServlet {
+@WebServlet("/ChartRSservlet")
+public class ChartRSservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Countservlet() {
+    public ChartRSservlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,26 +48,18 @@ public class Countservlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String year = request.getParameter("year");
-		String market = request.getParameter("market");
+		String testaddr = request.getParameter("market");
 		User user = new User();
 		user.setYear(year);
-		user.setMarket(market);
-	/*	
-		String month = request.getParameter("month");
-		String days = request.getParameter("days");
-		String market = request.getParameter("market");
-		String name = request.getParameter("name");
-		String manage = request.getParameter("manage");
-		String location = request.getParameter("location");
-		String channels = request.getParameter("channels");
-		System.out.println("year:"+year+";"+"month:"+month+";"+"days:"+days+";"+"market:"+market+";"+"manage:"+manage+";"+"name:"+name+";"+"location:"+location+";"+"channels:"+channels+";");*/
+		user.setMarket(testaddr);
+		System.out.println(user.getYear()+":"+user.getMarket());
 		MysqlDB mysqldb = new MysqlDB();
 		Connection connection = mysqldb.getConnection();
 		Statement stmt = null; 
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="SELECT COUNT(manage) as count FROM testtb WHERE YEAR(testtm)='"+ user.getYear()+"' AND testaddr='"+ user.getMarket() +"'";
+			String sql="select m.Monthnm as month,ifnull(t.result,0) as result from Mouthtb m left join (select month(testtm) as mon,CAST((100*sum(case when result ='ºÏ¸ñ' then 1 else 0 end) / COUNT(*)) as DECIMAL(13,2))as result from testtb where YEAR(testtm)='"+ user.getYear() +"' and testaddr='"+ user.getMarket() +"' group by MONTH(testtm)) t on m.Monthnm=t.mon";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
 			System.out.println(jsonData.toString());

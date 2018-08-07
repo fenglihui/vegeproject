@@ -24,16 +24,16 @@ import com.vege.information.User;
 import net.sf.json.JSONArray;
 
 /**
- * Servlet implementation class Countservlet
+ * Servlet implementation class Inforservlet
  */
-@WebServlet("/Countservlet")
-public class Countservlet extends HttpServlet {
+@WebServlet("/Inforservlet")
+public class Inforservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Countservlet() {
+    public Inforservlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,10 +47,10 @@ public class Countservlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String year = request.getParameter("year");
+		String manage = request.getParameter("manage");
 		String market = request.getParameter("market");
 		User user = new User();
-		user.setYear(year);
+		user.setManage(manage);
 		user.setMarket(market);
 	/*	
 		String month = request.getParameter("month");
@@ -67,7 +67,7 @@ public class Countservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="SELECT COUNT(manage) as count FROM testtb WHERE YEAR(testtm)='"+ user.getYear()+"' AND testaddr='"+ user.getMarket() +"'";
+			String sql="SELECT manage,name,photo,markaddr from marketinfor WHERE manage='"+ user.getManage()+"' AND testaddr='"+ user.getMarket() +"'";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
 			System.out.println(jsonData.toString());

@@ -324,14 +324,14 @@ select#food-market option{
 }
 #excel{
     float: right;
-    width: 520px;
-    height: 680px;
-    margin-top: 10px ;
-    margin-right: 35px;
+    width: 550px;
+    height: 635px;
+    margin-top: 55px;
+    margin-right: 7px;
     position: relative;
-    background: #121331;
-    overflow-y:auto;
-    overflow-x:hidden;
+    background: #040e3a;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .excel-img{
     display: block;
@@ -340,27 +340,41 @@ select#food-market option{
     z-index: 1007;
 }
 #excel-data{
-    position: relative;
-    z-index: 1009;
-    width:500px;
-    margin-left:10px;
+    position: absolute;
+    z-index: 1100;
+    top: 11px;
+    right: 28px;
 }
 #excel-data th{
-    width: 129px;
+    width: 100px;
     text-align: center;
     height: 40px;
     color:#FFF54E ;
     border: 1px solid #07306b;
 }
-#excel-data td{
-    width: 129px;
+#excel-td{
+	position:relative;
+	z-index:1009;
+    margin-top: 0;
+    margin-left: 7px;
+    margin-right: -21px;
+}
+#excel-td td{
+	width: 100px;
     text-align: center;
     height: 40px;
     color:#FFF54E ;
     border: 1px solid #07306b;
-}
-#excel-data td{
     text-align: center;
+}
+#excel-border{
+    width: 28px;
+    height:635px ;
+    position: absolute;
+    top: 55px;
+    right: 0px;
+    background: #040e3a;
+    z-index: 1100;
 }
 .clear{
     clear: both;

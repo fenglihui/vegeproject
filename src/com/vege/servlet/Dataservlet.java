@@ -53,7 +53,6 @@ public class Dataservlet extends HttpServlet {
 	/*	String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String days = request.getParameter("days");
-		String market = request.getParameter("market");
 		String name = request.getParameter("name");
 		String manage = request.getParameter("manage");
 		String location = request.getParameter("location");
@@ -62,10 +61,12 @@ public class Dataservlet extends HttpServlet {
 		MysqlDB mysqldb = new MysqlDB();
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
+		String market = request.getParameter("market");
 		String result = request.getParameter("result");
 		User user = new User();
 		user.setYear(year);
 		user.setMonth(month);
+		user.setMarket(market);
 		user.setResult(result);
 		System.out.println(user.getResult());
 		Connection connection = mysqldb.getConnection();
@@ -73,7 +74,7 @@ public class Dataservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="select manage,sampname,location,channels,testidx,result,YEAR(testtm) as year,MONTH(testtm) as month,DAY(testtm) as days from testtb where YEAR(testtm)='"+user.getYear()+"' and MONTH(testtm)='"+user.getMonth()+"' and result='"+ user.getResult() +"' ORDER BY testtm";
+			String sql="select manage,sampname,location,channels,testidx,result,YEAR(testtm) as year,MONTH(testtm) as month,DAY(testtm) as days from testtb where YEAR(testtm)='"+user.getYear()+"' and MONTH(testtm)='"+user.getMonth()+"' and result='"+ user.getResult() +"' and testaddr='"+ user.getMarket() +"' ORDER BY testtm";
 			rs = stmt.executeQuery(sql);
 			List list = new ArrayList();
 		/*	while(rs.next()) {

@@ -53,16 +53,18 @@ public class Testservlet extends HttpServlet {
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String days = request.getParameter("days");
+		String market = request.getParameter("market");
 		User user = new User();
 		user.setYear(year);
 		user.setMonth(month);
 		user.setDays(days);
+		user.setMarket(market);
 		Connection connection = mysqldb.getConnection();
 		Statement stmt = null; 
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="select manage,sampname,testidx,result from testtb where YEAR(testtm)='"+ user.getYear() +"' and MONTH(testtm)='"+ user.getMonth() +"' and DAY(testtm)='"+ user.getDays() +"'";
+			String sql="select manage,sampname,testidx,result,YEAR(testtm) as year,MONTH(testtm) as month,DAY(testtm) as days from testtb where YEAR(testtm)='"+ user.getYear() +"' and MONTH(testtm)='"+ user.getMonth() +"' and DAY(testtm)='"+ user.getDays() +"' and testaddr='"+user.getMarket()+"'";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
 			System.out.println(jsonData.toString());

@@ -49,4 +49,20 @@
     <servlet-name>Dataservlet</servlet-name>
     <url-pattern>/Servlet/Dataservlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ChartRSservlet</servlet-name>
+    <servlet-class>com.vege.servlet.ChartRSservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChartRSservlet</servlet-name>
+    <url-pattern>/Servlet/ChartRSservlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>Inforservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Inforservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Inforservlet</servlet-name>
+    <url-pattern>/Servlet/Inforservlet</url-pattern>
+  </servlet-mapping>
 </web-app>

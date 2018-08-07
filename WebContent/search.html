@@ -28,13 +28,15 @@
 <div id="cover">
     <div id="select-city">
         <form method="get" id="chartsform">
-            <select name="administrative" id="administrative" >
+            <select name="administrative" id="administrative" onchange="changemarket()">
                 <option value="1" selected="selected">青羊区</option>
                 <option value="2">武侯区</option>
                 <option value="3">金牛区</option>
                 <option value="4">锦江区</option>
                 <option value="5">成华区</option>
                 <option value="6">双流区</option>
+            </select>
+            <select name="market" id="market">
             </select>
             <select name="year" id="year">
                 <option value="2018" selected="selected">2018年</option>
@@ -68,15 +70,93 @@
     </div>
     <div style="position:absolute;top:0;right:0;width:30px;height:800px;background:#040E3A"></div>
 </div>
+<div id="view-infor">
+    <img src="img/错误.png" id="img-close" title="关闭" alt="关闭">
+    <p>摊主编号：</p>
+    <p>经营者姓名：</p>
+    <p>联系方式：</p>
+    <p>摊位所在地：</p>
+</div>
+<script type="text/javascript">
+    var Year = $("#year option:selected").val();
+    var Month = $("#month option:selected").val();
+    var Market = $("#market option:selected").val();
+    var Result = $("#result option:selected").val();
+    window.onload=function () {
+        $.ajax({
+            type:"GET",
+            url:"js/market.json",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                console.log(data.market1);
+                var mark;
+                if ($("#administrative option:selected").val()==1) {
+                    $.each(data.market1,function (i,n) {
+                       mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+            }
+        });
+    }
+    function changemarket() {
+        $.ajax({
+            type:"GET",
+            url:"js/market.json",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                console.log(data.market1);
+                $("#market").empty();
+                var mark;
+                if ($("#administrative option:selected").val()==1) {
+                    $.each(data.market1,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==2) {
+                    $.each(data.market2,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==3) {
+                    $.each(data.market3,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==4) {
+                    $.each(data.market4,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==5) {
+                    $.each(data.market5,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+                else if ($("#administrative option:selected").val()==6) {
+                    $.each(data.market6,function (i,n) {
+                        mark = "<option value='"+n.desc +"'>"+ n.desc +"</option>"
+                        $("#market").append(mark);
+                    });
+                }
+            }
+        });
+    }
+</script>
 <script type="text/javascript">//渲染日期模块
-var Year = $("#year option:selected").val();
-var Month = $("#month option:selected").val();
-var Result = $("#result option:selected").val();
 $(function(){
     $("#date").selectDate();
     $("#submit").click(function(){
     	Year = $("#year option:selected").val();
     	Month = $("#month option:selected").val();
+        Market = $("#market option:selected").val();
     	Result = $("#result option:selected").val();
     	$("#table-data").empty();
     	$.ajax({
@@ -85,6 +165,7 @@ $(function(){
             data:{
                 "year":Year,
                 "month":Month,
+                "market":Market,
                 "result":Result
             },
             async:true,
@@ -96,18 +177,46 @@ $(function(){
                 $.each(data,function (i,n) {
                 	id=i+1;
                     if(i%2==0){
-                    	item = "<tr><td class='background-b'>" + id + "</td><td class='background-b'>" + n.manage + "</td><td class='background-b'>"+ n.sampname + "</td><td class='background-b'>"+ n.location + "</td><td class='background-b'>" +
+                    	item = "<tr><td class='background-b'>" + id + "</td><td class='background-b manage-infor'>" + n.manage + "</td><td class='background-b'>"+ n.sampname + "</td><td class='background-b'>"+ n.location + "</td><td class='background-b'>" +
                         n.channels + "</td><td class='background-b'>"+ n.testidx + "</td><td class='background-b'>"+ n.result + "</td><td class='background-b'>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
                     }                  
                     else{
-                    	item = "<tr><td class='background-w'>" + id + "</td><td class='background-w'>" + n.manage + "</td><td class='background-w'>"+ n.sampname + "</td><td class='background-w'>"+ n.location + "</td><td class='background-w'>" +
+                    	item = "<tr><td class='background-w'>" + id + "</td><td class='background-w manage-infor'>" + n.manage + "</td><td class='background-w'>"+ n.sampname + "</td><td class='background-w'>"+ n.location + "</td><td class='background-w'>" +
                         n.channels + "</td><td class='background-w'>"+ n.testidx + "</td><td class='background-w'>"+ n.result + "</td><td class='background-w'>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
                     }
                     $("#table-data").append(item);
-                   
                 })
             }
         });
+    });
+    $(".manage-infor").click(function () {
+        var Manage = $(this).text();
+        $.ajax({
+            type:"GET",
+            url:"Inforservlet",
+            data:{
+                "manage":Manage,
+                "market":Market
+            },
+            dataType:"json",
+            success:function (data) {
+                console.log("sydata",data);
+                var span1,span2,span3,span4;
+                $.each(data,function (i,n) {
+                    span1 = "<span>"+ n.manage +"</span>";
+                    span2 = "<span>"+ n.name +"</span>";
+                    span3 = "<span>"+ n.photo +"</span>";
+                    span4 = "<span>"+ n.markaddr +"</span>";
+                    $("#view-infor p:eq(0)").append(span1);
+                    $("#view-infor p:eq(1)").append(span2);
+                    $("#view-infor p:eq(2)").append(span3);
+                    $("#view-infor p:eq(3)").append(span4);
+                });
+            }
+        });
+    });
+    $("#img-close").click(function () {
+        $("#view-infor").css("display","none");
     });
 });
 </script>

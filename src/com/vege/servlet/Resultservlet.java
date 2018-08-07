@@ -48,8 +48,10 @@ public class Resultservlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String year = request.getParameter("year");
+		String market = request.getParameter("market");
 		User user = new User();
 		user.setYear(year);
+		user.setMarket(market);
 	/*	
 		String month = request.getParameter("month");
 		String days = request.getParameter("days");
@@ -65,7 +67,7 @@ public class Resultservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="SELECT (SELECT COUNT(manage) FROM testtb WHERE result='合格' AND YEAR(testtm)='"+ user.getYear() +"')*100/(SELECT COUNT(manage) FROM testtb) as result";
+			String sql="SELECT (SELECT COUNT(manage) FROM testtb WHERE result='合格' AND YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"')*100/(SELECT COUNT(manage) FROM testtb WHERE YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"') as result";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
 			System.out.println(jsonData.toString());

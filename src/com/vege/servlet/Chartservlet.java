@@ -39,11 +39,12 @@ public class Chartservlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String year = "2018";//request.getParameter("year");
-		String testaddr = "益民菜市(长顺街店)";//request.getParameter("market");
+		String year = request.getParameter("year");
+		String testaddr = request.getParameter("market");
 		User user = new User();
 		user.setYear(year);
 		user.setMarket(testaddr);
+		System.out.println(user.getYear()+":"+user.getMarket());
 		MysqlDB mysqldb = new MysqlDB();
 		Connection connection = mysqldb.getConnection();
 		Statement stmt = null; 

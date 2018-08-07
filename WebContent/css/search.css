@@ -16,16 +16,16 @@ select{
     text-align: center;
     width: auto;
     height: 40px;
-    padding: 0 50px;
+    padding: 0 40px;
 }
 select option{
     text-align: center;
 }
 #administrative{
-    margin-left: 155px;
+    margin-left: 145px;
 }
-#year,#month,#result{
-    margin-left: 155px;
+#market,#year,#month,#result{
+    margin-left: 90px;
 }
 #submit{
     font-size: 18px;
@@ -33,7 +33,7 @@ select option{
     font-family: "Microsoft YaHei";
     width: 155px;
     height: 40px;
-    margin-left: 150px;
+    margin-left: 110px;
 }
 #table{
     height:640px;
@@ -74,4 +74,28 @@ select option{
 }
 .background-w{
     background: #FFFFFF;
+}
+#view-infor{
+    position: fixed;
+    width:500px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -250px;
+    background: #293954;
+    z-index: 2000;
+    border: 1px solid #FFFFFF;
+    display: block;
+}
+#view-infor p{
+    margin: 25px 30px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-family: "Microsoft YaHei";
+}
+#view-infor img{
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
