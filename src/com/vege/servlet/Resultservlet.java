@@ -67,7 +67,7 @@ public class Resultservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="SELECT (SELECT COUNT(manage) FROM testtb WHERE result='合格' AND YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"')*100/(SELECT COUNT(manage) FROM testtb WHERE YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"') as result";
+			String sql="SELECT IFNULL((SELECT COUNT(manage) FROM testtb WHERE result='合格' AND YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"')*100/(SELECT COUNT(manage) FROM testtb WHERE YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"'),0) as result";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
 			System.out.println(jsonData.toString());

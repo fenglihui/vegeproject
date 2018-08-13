@@ -6,7 +6,7 @@ public class MysqlDB {
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost:3306/vegemarket?serverTimezone=GMT";
     static final String USER = "root";
-    static final String PASS = "root"; 
+    static final String PASS = "vegetables"; 
     private static Connection connection = null;
     
     public static Connection getConnection(){

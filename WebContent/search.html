@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="title">
-    <img src="img/智慧菜市云-logo.png" alt="智慧菜市云平台" class="title-img">
+    <img src="img/title-logo.png" alt="智慧菜市云平台" class="title-img">
 </div>
 <nav>
     <img src="img/nav.png" class="title-nav" style="height: 120px">
@@ -71,12 +71,19 @@
     <div style="position:absolute;top:0;right:0;width:30px;height:800px;background:#040E3A"></div>
 </div>
 <div id="view-infor">
-    <img src="img/错误.png" id="img-close" title="关闭" alt="关闭">
-    <p>摊主编号：</p>
+    <img src="img/error.png" id="img-close" title="关闭" alt="关闭">
+    <p>经营者编号：</p>
     <p>经营者姓名：</p>
-    <p>联系方式：</p>
-    <p>摊位所在地：</p>
+    <p>经营者电话：</p>
+    <p>经营者所在地：</p>
+    <p>管理负责人：</p>
+    <p>负责人电话：</p>
+    <p>监管人员：</p>
+    <p>监管人员电话：</p>
 </div>
+<footer style="width:100%;min-width:1800px;height:60px;line-height:60px;margin-top: 80px;background-color: #000000;color: #FFFFFF;text-align:center;font-size: 18px">
+   <a href="http://www.miitbeian.gov.cn" style="color: #FFFFFF;text-decoration: none">备案/许可证编号：蜀ICP备18023143号</a>
+</footer>
 <script type="text/javascript">
     var Year = $("#year option:selected").val();
     var Month = $("#month option:selected").val();
@@ -189,8 +196,11 @@ $(function(){
             }
         });
     });
-    $(".manage-infor").click(function () {
+    $("#table-data").on("click",".manage-infor",function () {
+    	$("#view-infor p span").remove();
+    	$("#view-infor").css("display","block");
         var Manage = $(this).text();
+        console.log(Manage);
         $.ajax({
             type:"GET",
             url:"Inforservlet",
@@ -207,10 +217,18 @@ $(function(){
                     span2 = "<span>"+ n.name +"</span>";
                     span3 = "<span>"+ n.photo +"</span>";
                     span4 = "<span>"+ n.markaddr +"</span>";
+                    span5 = "<span>"+ n.principal +"</span>";
+                    span6 = "<span>"+ n.principalpho +"</span>";
+                    span7 = "<span>"+ n.supervision +"</span>";
+                    span8 = "<span>"+ n.supervisionpho +"</span>";
                     $("#view-infor p:eq(0)").append(span1);
                     $("#view-infor p:eq(1)").append(span2);
                     $("#view-infor p:eq(2)").append(span3);
                     $("#view-infor p:eq(3)").append(span4);
+                    $("#view-infor p:eq(4)").append(span5);
+                    $("#view-infor p:eq(5)").append(span6);
+                    $("#view-infor p:eq(6)").append(span7);
+                    $("#view-infor p:eq(7)").append(span8);
                 });
             }
         });

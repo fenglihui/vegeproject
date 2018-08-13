@@ -77,25 +77,28 @@ select option{
 }
 #view-infor{
     position: fixed;
-    width:500px;
-    height: 300px;
+    width:600px;
+    height: 420px;
     top: 50%;
     left: 50%;
-    margin-top: -150px;
-    margin-left: -250px;
+    margin-top: -210px;
+    margin-left: -300px;
     background: #293954;
     z-index: 2000;
     border: 1px solid #FFFFFF;
-    display: block;
+    display: none;
 }
 #view-infor p{
-    margin: 25px 30px;
+    margin: 20px 30px;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 18px;
     font-family: "Microsoft YaHei";
 }
 #view-infor img{
     position: absolute;
     top: 5px;
     right: 5px;
+}
+.manage-infor{
+	cursor:pointer;
 }

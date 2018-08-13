@@ -17,7 +17,7 @@
 </head>
 <body>
 <div id="title">
-    <img src="img/智慧菜市云-logo.png" alt="智慧菜市云平台" class="title-img">
+    <img src="img/title-logo.png" alt="智慧菜市云平台" class="title-img">
 </div>
 <nav>
     <img src="img/nav.png" class="title-nav" style="height: 120px">
@@ -47,35 +47,35 @@
 </div><!--fullSlide end-->
 <div id="data-img">
     <div class="data-img">
-        <img src="img/边框.png">
+        <img src="img/border2.png">
         <p style="position: absolute;top: 63px;left: 53px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">全年抽检批次</p>
-        <img src="img/指示线条.png" class="line-position">
+        <img src="img/indicate.png" class="line-position">
         <div id="indicatorContainer" class="indicator"></div>
     </div>
     <div class="data-img">
-        <img src="img/边框.png">
+        <img src="img/border2.png">
         <p style="position: absolute;top: 63px;left: 53px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">全年抽检合格率</p>
-        <img src="img/指示线条.png" class="line-position">
+        <img src="img/indicate.png" class="line-position">
         <div id="indicatorContainer2" class="indicator"></div>
     </div>
     <div class="data-img">
-        <img src="img/边框.png">
+        <img src="img/border2.png">
         <p style="position: absolute;top: 168px;left: 234px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">敬请期待 ...</p>
     </div>
 </div>
 <div id="map">
-    <img src="img/矩形%205%20拷贝%204.png" class="border">
-    <img src="img/左边.png" style="top:220px;left:18px ;z-index: 1001">
-    <img src="img/右边.png" style="top:220px;left:1188px ;z-index: 1001">
-    <img src="img/左上角.png" style="top:8px;left:19px;z-index: 1001">
+    <img src="img/border.png" class="border">
+    <img src="img/left.png" style="top:220px;left:18px ;z-index: 1001">
+    <img src="img/right-border.png" style="top:220px;left:1188px ;z-index: 1001">
+    <img src="img/left-top.png" style="top:8px;left:19px;z-index: 1001">
     <div id="left-map">
-        <img src="img/滑动栏.png" class="hd-img" >
+        <img src="img/hd.png" class="hd-img" >
         <div id="map-introduce" style="position: absolute;top:0;background-color: rgba(18,19,49,0.67);border-left:2px solid  #053b7b;z-index: 1000">
             <ul id="myList">
 
             </ul>
         </div>
-        <img src="img/区域下拉菜单.png" class="select-img">
+        <img src="img/select.png" class="select-img">
         <form method="get">
             <select name="food-market" id="food-market">
                 <option value="1" selected="selected">青羊区</option>
@@ -87,7 +87,7 @@
             </select>
         </form>
     </div>
-    <img src="img/表格背景.png" class="excel-img">
+    <img src="img/table-background.png" class="excel-img">
     <table id="excel-data">
         <tr>
             <th>经营户</th>
@@ -101,6 +101,7 @@
         <table id="excel-td">
 
         </table>
+        <div id="hint">今日暂无数据</div>
     </div>
     <div id="excel-border">
 
@@ -238,6 +239,14 @@
             dataType:"json",
             success:function (data) {
                 console.log("jsondatta",data);
+                var jsonlength=0;
+                for(var js in data){
+                	jsonlength++;
+                }
+                console.log("jsonlength",jsonlength);
+                if (jsonlength==0) {
+                    $("#hint").css("display","block");
+                }
                 var item;
                 $.each(data,function (i,n) {
                     item = "<tr><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td><td>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
@@ -250,6 +259,7 @@
 <script type="text/javascript">//智慧菜市云地图模块
 function excelmap() {
     $("#excel-td").empty();
+    $("#hint").css("display","none");
     $.ajax({
         type:"GET",
         url:"Testservlet",
@@ -263,6 +273,14 @@ function excelmap() {
         dataType:"json",
         success:function (data) {
             console.log("jsondatta",data);
+            var jsonlength=0;
+            for(var js in data){
+            	jsonlength++;
+            }
+            console.log("jsonlength",jsonlength);
+            if (jsonlength==0) {
+                $("#hint").css("display","block");
+            }
             var item;
             $.each(data,function (i,n) {
                 item = "<tr><td>" + n.manage + "</td><td>"+ n.sampname + "</td><td>"+ n.testidx + "</td><td>"+ n.result + "</td><td>"+ n.year+"-"+n.month+"-"+n.days+"</td></tr>";
