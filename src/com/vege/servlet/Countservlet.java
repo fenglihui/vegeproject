@@ -70,8 +70,9 @@ public class Countservlet extends HttpServlet {
 			String sql="SELECT COUNT(manage) as count FROM testtb WHERE YEAR(testtm)='"+ user.getYear()+"' AND testaddr='"+ user.getMarket() +"'";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
-			System.out.println(jsonData.toString());
+			//System.out.println(jsonData.toString());
 			out.print(jsonData);
+			stmt.close();
 			connection.close();
 			
 		} catch (SQLException e) {

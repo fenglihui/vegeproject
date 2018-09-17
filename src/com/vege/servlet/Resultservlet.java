@@ -70,8 +70,9 @@ public class Resultservlet extends HttpServlet {
 			String sql="SELECT IFNULL((SELECT COUNT(manage) FROM testtb WHERE result='ºÏ¸ñ' AND YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"')*100/(SELECT COUNT(manage) FROM testtb WHERE YEAR(testtm)='"+ user.getYear() +"' AND testaddr='"+ user.getMarket() +"'),0) as result";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
-			System.out.println(jsonData.toString());
+			//System.out.println(jsonData.toString());
 			out.print(jsonData);
+			stmt.close();
 			connection.close();
 			
 		} catch (SQLException e) {

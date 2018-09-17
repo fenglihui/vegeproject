@@ -59,11 +59,12 @@ public class ChartRSservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="select m.Monthnm as month,ifnull(t.result,0) as result from Mouthtb m left join (select month(testtm) as mon,CAST((100*sum(case when result ='合格' then 1 else 0 end) / COUNT(*)) as DECIMAL(13,2))as result from testtb where YEAR(testtm)='"+ user.getYear() +"' and testaddr='"+ user.getMarket() +"' group by MONTH(testtm)) t on m.Monthnm=t.mon";
+			String sql="select m.Monthnm as month,ifnull(t.result,0) as result from mouthtb m left join (select month(testtm) as mon,CAST((100*sum(case when result ='合格' then 1 else 0 end) / COUNT(*)) as DECIMAL(13,2))as result from testtb where YEAR(testtm)='"+ user.getYear() +"' and testaddr='"+ user.getMarket() +"' group by MONTH(testtm)) t on m.Monthnm=t.mon";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
-			System.out.println(jsonData.toString());
+			//System.out.println(jsonData.toString());
 			out.print(jsonData);
+			stmt.close();
 			connection.close();
 			
 		} catch (SQLException e) {

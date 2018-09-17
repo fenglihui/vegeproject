@@ -64,11 +64,28 @@ public class Testservlet extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			stmt=connection.createStatement();
-			String sql="select manage,sampname,testidx,result,YEAR(testtm) as year,MONTH(testtm) as month,DAY(testtm) as days from testtb where YEAR(testtm)='"+ user.getYear() +"' and MONTH(testtm)='"+ user.getMonth() +"' and DAY(testtm)='"+ user.getDays() +"' and testaddr='"+user.getMarket()+"'";
+			String sql="select manage,sampname,location,channels,testidx,result,YEAR(testtm) as year,MONTH(testtm) as month,DAY(testtm) as days from testtb where YEAR(testtm)='"+ user.getYear() +"' and MONTH(testtm)='"+ user.getMonth() +"' and DAY(testtm)='"+ user.getDays() +"' and testaddr='"+user.getMarket()+"'";
 			rs = stmt.executeQuery(sql);
-			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
-			System.out.println(jsonData.toString());
-			out.print(jsonData);
+			String text = "";
+			while(rs.next()) {
+				String manage = rs.getString("manage");
+				String sampname = rs.getString("sampname");
+				String location = rs.getString("location");
+				String channels = rs.getString("channels");
+				String testidx = rs.getString("testidx");
+				String result = rs.getString("result");
+				//String testtm = rs.getString("testtm");
+				//String testtm = year+"-"+month+"-"+days;
+				//String testaddr = market;
+				//java.math.BigDecimal result = rs.getBigDecimal("result");
+				//java.sql.Date testtm = rs.getDate("testtm");
+				text =  text + manage+"^"+sampname+"^"+ location+"^"+ channels+"^"+ testidx+"^"+ result+"^"+ year+"^"+ month+"^"+ days+"|";
+		    }
+			//JSONArray jsonData = JSONArray.fromObject(convertList(rs));
+			//System.out.println(jsonData.toString());
+			//out.print(jsonData);
+			out.print(text);
+			stmt.close();
 			connection.close();
 			
 		} catch (SQLException e) {

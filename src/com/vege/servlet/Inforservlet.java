@@ -52,7 +52,7 @@ public class Inforservlet extends HttpServlet {
 		User user = new User();
 		user.setManage(manage);
 		user.setMarket(market);
-		System.out.println(user.getManage()+":"+user.getMarket());
+		//System.out.println(user.getManage()+":"+user.getMarket());
 	/*	
 		String month = request.getParameter("month");
 		String days = request.getParameter("days");
@@ -71,8 +71,9 @@ public class Inforservlet extends HttpServlet {
 			String sql="SELECT * from marketinfor,marketpeople WHERE manage='"+ user.getManage()+"' AND marketinfor.testaddr='"+ user.getMarket() +"' AND marketinfor.testaddr=marketpeople.testaddr";
 			rs = stmt.executeQuery(sql);
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
-			System.out.println(jsonData.toString());
+			//System.out.println(jsonData.toString());
 			out.print(jsonData);
+			stmt.close();
 			connection.close();
 			
 		} catch (SQLException e) {

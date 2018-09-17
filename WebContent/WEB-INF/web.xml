@@ -3,11 +3,6 @@
   <display-name>vegeproject</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>Testservlet</servlet-name>
@@ -57,12 +52,28 @@
     <servlet-name>ChartRSservlet</servlet-name>
     <url-pattern>/Servlet/ChartRSservlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>Inforservlet</servlet-name>
     <servlet-class>com.vege.servlet.Inforservlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Inforservlet</servlet-name>
     <url-pattern>/Servlet/Inforservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Indexservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Indexservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Indexservlet</servlet-name>
+    <url-pattern>/Servlet/Indexservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Checkuserservlet</servlet-name>
+    <servlet-class>com.vege.servlet.Checkuserservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Checkuserservlet</servlet-name>
+    <url-pattern>/Servlet/Checkuserservlet</url-pattern>
   </servlet-mapping>
 </web-app>

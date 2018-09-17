@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/vegehome.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" href="css/shutter.css">
+    <link rel="stylesheet" href="css/button.css">
     <title>智慧菜市云平台</title>
-    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.6&key=0f725c13d51ff337bba15656045c80b4"></script>
     <script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
-    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/superslide.2.1.js"></script>
     <script src="js/radialIndicator.js"></script>
 </head>
@@ -31,10 +36,94 @@
     <div class="line"></div>
     <p class="nav-text"><a href="about.html">关于</a></p>
     <div class="line"></div>
+    <p class="nav-text" id="index-login">登录</p>
+    <div class="line"></div>
+    <p class="nav-text" style="margin-top: 48px;font-size: 16px;color:#fff54e;cursor:default;">欢迎用户：<span id="user"></span></p>
 </nav>
+<div id="all">
+    <form action="index.html" method="post" class="include form-group" id="login" name="login" onsubmit="return check()">
+        <div class="login-img" id="login-img">
+            <img src="img/timg2.jpg" alt="登录图标">
+        </div>
+        <img src="img/close.png" id="close" style="position: absolute;top:5px;right: 5px;width: 20px;height: 20px;cursor: pointer;">
+        <div class="title">
+            <img src="img/loginlogo.png" alt="智慧菜市云logo" style="margin: 0 auto;display: block;">
+        </div>
+        <div id="loginhint" class="login" style="height: 20px;visibility: hidden;">
+            <p style="color: #ff0a18">用户名或密码错误</p>
+        </div>
+        <div class="login" style="margin-top:0 ">
+            <img src="img/icon_username.png" alt="用户名" class="icon-position">
+            <label for="name" class="sr-only">用户名</label>
+            <input type="text" id="name" name="username" class="form-control" placeholder="用户名" style="padding: 6px 43px;">
+        </div>
+        <div class="login">
+            <img src="img/icon_password.png" alt="密码" class="icon-position">
+            <label for="password" class="sr-only">密&nbsp&nbsp&nbsp&nbsp码</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="密码" style="padding: 6px 43px;">
+        </div>
+        <div class="click">
+            <input type="submit" id="submit" name="submit" class="button button-primary button-rounded button-jumbo form-control" value="登录">
+        </div>
+        <div class="register">
+            <span id="register"><a href="">注册账户</a></span>
+            <span id="find"><a href="">忘记密码？</a></span>
+        </div>
+        <p id="clause">若继续，则代表您同意<a href="#" id="fwtk">服务条款</a>和<a href="#" id="yssm">隐私声明</a></p>
+    </form>
+    <div id="fw" class="tk">
+        <div class="login-img" id="tk-img">
+            <img src="img/timg2.jpg" alt="登录图标">
+        </div>
+        <p style="margin-top:50px;font-size: 18px "><b>摘要</b></p>
+        <p>本文首先对下文条款进行了概括。本摘要旨在帮助您了解各项条款，但请务必阅读整个文件，因为当您同意时，
+            即表示您接受所有条款，而不仅是接受本摘要。</p>
+        <ul>
+            <li><p>智慧菜市云平台是慧威仕科技有限公司向您提供的一套服务。</p></li>
+            <li><p>服务以“现状”提供，并不以任何形式提供担保。对于因您使用此平台造成的任何损害，作者承担的责任极其有限。</p></li>
+        </ul>
+        <p style="margin-top:20px;font-size: 18px" ><b>服务条款</b></p>
+        <ol>
+            <li><p style="margin-top:15px;font-size: 16px" >简介</p></li>
+            <p>下列服务条款（以下简称“条款”）管辖您对慧威仕科技有限公司提供的一套在线服务智慧菜市云平台的使用。</p>
+            <li><p style="margin-top:15px;font-size: 16px" >平台帐户</p></li>
+            <p>为了能够使用部分平台功能，您需要创建一个平台帐户。在注册期间，会要求您设置密码。
+                您有责任为您的密码保密，并且应对通过平台帐户发生的活动负责。
+                对于因未经授权使用平台帐户而产生的任何损失，四川慧威仕有限公司概不负责。</p>
+            <li><p style="margin-top:15px;font-size: 16px" >功能</p></li>
+            <p>访问本网站的某些功能时，必须按照网站的提示进行操作，不得将某些功能用作非法用途。</p>
+        </ol>
+    </div>
+    <div id="ys" class="tk" style="height: 540px;">
+        <div class="login-img" id="ys-img">
+            <img src="img/timg2.jpg" alt="登录图标">
+        </div>
+        <p style="text-align: center;margin-top: 50px;margin-bottom:0;font-size: 24px;">隐私权政策</p>
+        <p style="font-size: 20px;margin:20px 20px;"><b>智慧菜市云平台隐私声明</b></p>
+        <p style="font-size: 16px;margin: 10px 20px;"><b>在智慧菜市云平台中，我们认为隐私是健康互联网的基石。</b></p>
+        <p>这就是我们创建智慧菜市云平台以及所有产品的初衷，目的是让您能够更好地控制您在网上共享的信息以及与我们共享的信息。
+            我们力求只收集为大家改进智慧菜市云平台而需要的信息。</p>
+        <p>在本“隐私声明”中，我们会说明智慧菜市云平台共享的数据，并帮助您设置，以减少共享内容。
+            我们还遵守在四川慧威仕科技有限公司隐私政策中规定的，有关如何获取、处理并共享我们从智慧菜市云平台收集的信息的惯例。</p>
+        <p style="font-size: 20px;margin:15px 20px;"><b>默认情况下，智慧菜市云平台会共享数据，以：</b></p>
+        <p style="font-size: 16px;margin:10px 20px;"><b>为各地的用户改进性能和稳定性</b></p>
+        <ul>
+            <li><p>交互数据：智慧菜市云平台会发送以下相关数据给我们：您与智慧菜市云平台的交互（例如，打开的选项卡和窗口的数量；
+                访问网页的数量；已安装浏览器附加组件的数量和类型；以及会话时长），以及由四川慧威仕科技有限公司或我们的合作伙伴所
+                提供的智慧菜市云平台功能（例如与智慧菜市云平台搜索功能的交互以及搜索合作伙伴的推荐）。</p>
+            </li>
+            <li>
+                <p>技术数据：智慧菜市云平台会发送以下相关信息给我们：您智慧菜市云平台的版本和语言；设备操作系统和硬件配置；
+                内存、有关崩溃和错误的基本信息；诸如更新、安全浏览和激活等自动化流程的结果。
+                    当智慧菜市云平台向我们发送数据时，会临时收集您的 IP 地址作为我们服务器日志的一部分。</p>
+            </li>
+        </ul>
+        <p>阅读针对桌面、Android 或 iOS 的遥测技术文档，或者了解如何选择退出该数据收集功能。</p>
+    </div>
+</div>
 <div class="fullSlide">
     <div class="bd">
-        <ul>
+        <ul class="choose">
             <li _src="url(img/banner1.jpg)" style="background:#E2025E center 0 no-repeat;"><a href="#"></a></li>
             <li _src="url(img/banner2.jpg)" style="background:#DED5A1 center 0 no-repeat;"><a href="#"></a></li>
             <li _src="url(img/banner3_conew1.jpg)" style="background:#B8CED1 center 0 no-repeat;"><a href="#"></a></li>
@@ -60,7 +149,9 @@
     </div>
     <div class="data-img">
         <img src="img/border2.png">
-        <p style="position: absolute;top: 168px;left: 234px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei'">敬请期待 ...</p>
+        <p style="width:500px;position: absolute;top: 40px;left: 45px;color: #fff54e;font-size: 30px;font-family: 'Microsoft YaHei';text-align:left;"><a href="about.html" class="div3">智慧菜市云平台</a></p>
+        <p style="width:500px;position: absolute;top: 110px;left: 45px;color: #fff54e;font-size: 20px;font-family: 'Microsoft YaHei';text-align:left;line-height:1.4"><a href="about.html" class="div3">由四川慧威仕科技有限公司数十名互联网领域和食品检测领域资深人员历时两年，自主研发设计的针对农贸市场食品安全监管的大数据平台。<br>
+            该平台依托互联网+和大数据分析，将快检数据、溯源数据、经营主体信息通过自主研发的智能手持一体机迅速录入并上传到智慧菜市云数据中心，形成信息和数据的存档、分析和发布等相关后台处理...</a></p>
     </div>
 </div>
 <div id="map">
@@ -204,7 +295,6 @@
             async:true,
             dataType:"json",
             success:function (data) {
-            	console.log("countdata",data);
                 setTimeout(function () {
                     action(data[0].count)
                 }, 500);
@@ -220,7 +310,6 @@
             async:true,
             dataType:"json",
             success:function (data) {
-            	console.log("resultdata",data);
                 setTimeout(function () {
                     action2(data[0].result)
                 }, 500);
@@ -228,7 +317,7 @@
         });
         $.ajax({
             type:"GET",
-            url:"Testservlet",
+            url:"Indexservlet",
             data:{
                 "year":Year,
                 "month":Month,
@@ -238,12 +327,10 @@
             async:true,
             dataType:"json",
             success:function (data) {
-                console.log("jsondatta",data);
                 var jsonlength=0;
                 for(var js in data){
                 	jsonlength++;
                 }
-                console.log("jsonlength",jsonlength);
                 if (jsonlength==0) {
                     $("#hint").css("display","block");
                 }
@@ -262,7 +349,7 @@ function excelmap() {
     $("#hint").css("display","none");
     $.ajax({
         type:"GET",
-        url:"Testservlet",
+        url:"Indexservlet",
         data:{
             "year":Year,
             "month":Month,
@@ -272,12 +359,10 @@ function excelmap() {
         async:true,
         dataType:"json",
         success:function (data) {
-            console.log("jsondatta",data);
             var jsonlength=0;
             for(var js in data){
             	jsonlength++;
             }
-            console.log("jsonlength",jsonlength);
             if (jsonlength==0) {
                 $("#hint").css("display","block");
             }
@@ -298,7 +383,6 @@ function excelmap() {
         async:true,
         dataType:"json",
         success:function (data) {
-        	console.log("countdata",data);
             setTimeout(function () {
                 action(data[0].count)
             }, 500);
@@ -314,7 +398,7 @@ function excelmap() {
         async:true,
         dataType:"json",
         success:function (data) {
-        	console.log("resultdata",data);
+        	//console.log("resultdata",data);
             setTimeout(function () {
                 action2(data[0].result)
             }, 500);
@@ -359,8 +443,19 @@ function excelmap() {
                 return dataItem.position;
             },
             getMarker: function(dataItem, context, recycledMarker) {
-                var label = String.fromCharCode('1'.charCodeAt(0) + context.index);
-
+                if (context.index<9){
+                    var label = String.fromCharCode('1'.charCodeAt(0) + context.index);
+                }
+                else if(context.index>=9&&context.index<19){
+                    var label = String.fromCharCode('1'.charCodeAt(0),'0'.charCodeAt(0) + (context.index-9));
+                }
+                else if(context.index>=19&&context.index<29){
+                    var label = String.fromCharCode('2'.charCodeAt(0),'0'.charCodeAt(0) + (context.index-19));
+                }
+                else if(context.index>=29&&context.index<39){
+                    var label = String.fromCharCode('3'.charCodeAt(0),'0'.charCodeAt(0) + (context.index-29));
+                }
+                //console.log(context.index);
                 /* if (recycledMarker) {
                      //存在可回收利用的marker,直接setLabel返回
                      recycledMarker.setLabel(label);
@@ -464,6 +559,75 @@ function excelmap() {
         });
         //清除数据
         //markerList.render([]);
+    }
+</script>
+<script>
+    $(document).ready(function () {
+    	
+    	$("#index-login").click(function () {
+    		if($("#index-login").html()=="登录"){
+    			$("#all").css("display","block");
+    		}
+    		else if($("#index-login").html()=="注销"){
+    			$("#index-login").html("登录");
+    			$.cookie('nickname',"",{ path: "/"});
+    			$("#user").html($.cookie('nickname'));
+    		}
+        });
+        $("#close").click(function () {
+            $("#all").css("display","none");
+        });
+        $("#name").focus(function(){
+        	$("#loginhint").css("visibility","hidden");
+        });
+        $("#fwtk").click(function () {
+            $("#login").css("display","none");
+            $("#fw").css("display","block");
+            $(document).attr("title","服务条款");
+        });
+        $("#tk-img").click(function(){
+            $("#fw").css("display","none");
+            $("#login").css("display","block");
+            $(document).attr("title","登录  继续访问  个人主页");
+        });
+        $("#yssm").click(function () {
+            $("#login").css("display","none");
+            $("#ys").css("display","block");
+            $(document).attr("title","隐私声明");
+        });
+        $("#ys-img").click(function(){
+            $("#ys").css("display","none");
+            $("#login").css("display","block");
+            $(document).attr("title","登录  继续访问  个人主页");
+        });
+        if($.cookie('nickname')!=""&&$.cookie('nickname')!=null){
+          	$("#index-login").html("注销");
+          	$("#user").html($.cookie('nickname'));
+          }
+          console.log("nickname",$.cookie('nickname'));
+    });
+    function check() {
+        $.ajax({
+            url: "Checkuserservlet",
+            async: false,//同步传输
+            type: "POST",
+            data: {username:$("#name").val(),password:$("#password").val()},
+            dataType:"json",
+            success: function (data) {
+            	//console.log("inputuser",$("#name").val());
+            	//console.log("username",data);
+            	if(data!=""&&data!=null){
+            		$("#loginhint").css("visibility","hidden");
+            		$.cookie('nickname',data[0].nickname,{ path: "/"});
+                	n=true;
+                }
+                else{
+                	$("#loginhint").css("visibility","visible");
+                	n=false;
+                }
+            }
+        });
+        return n;
     }
 </script>
 </body>

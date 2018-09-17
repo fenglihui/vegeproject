@@ -1,0 +1,125 @@
+#all{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1999;
+    display: none;
+}
+.include{
+    width: 400px;
+    height:480px;
+    position: fixed;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border: 1px solid #e8e8e8;
+    z-index: 2000;
+    display:block;
+}
+.title{
+    width: 100%;
+    height: auto;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+.title p{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+.login{
+    position: relative;
+    margin: 10px 40px 0 40px;
+    height: 45px;
+}
+input[name="username"],input[name="password"]{
+    height: 40px;
+    border: 1px solid #000000;
+}
+.click{
+    margin: 20px 40px 0 40px;
+    height: 60px;
+}
+.register{
+    margin: 20px 40px 10px 40px;
+    height: 40px;
+}
+.register span{
+    display: block;
+    line-height: 40px;
+}
+.register a{
+    text-decoration: none;
+}
+span#register{
+    text-align: left;
+    float: left;
+}
+span#find{
+    text-align: right;
+    float: right;
+}
+#clause{
+    margin: 15px 40px;
+    height: 40px;
+    text-align: center;
+}
+#clause,#clause a{
+    color: #c5c5c5;
+}
+#clause a{
+    text-decoration: underline;
+}
+.login-img{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 4;
+    border-radius: 50%;
+}
+.login-img img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+}
+.tk{
+    width: 700px;
+    height:520px;
+    position: fixed;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border: 1px solid #e8e8e8;
+}
+#fw{
+    z-index: 3;
+    display: none;
+}
+#ys{
+    z-index: 2;
+    display: none;
+}
+.tk p{
+    margin:10px 20px;
+}
+ol li {
+    font-weight: bold;
+}
+.icon-position{
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}

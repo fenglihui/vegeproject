@@ -40,10 +40,12 @@ select option{
     margin: 0 auto;
     position: relative;
     overflow-y:auto;
+    width: 1530px;
+    overflow-x: hidden;
 }
 #table-title{
 	width: 1530px;
-    margin: 0 auto 0 137px;
+    margin: 0 auto 0 auto;
     background: #293954;
 }
 #table-title th{
@@ -58,7 +60,7 @@ select option{
     position: relative;
     z-index: 1000;
     border: none;
-    margin-left: 134px;
+    width:1530px;
 }
 #table-data td{
     width: 190px;

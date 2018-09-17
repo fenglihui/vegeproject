@@ -2,12 +2,9 @@
     margin: 0;
     padding: 0;
 }
-@font-face {
-    font-family: 'Microsoft YaHei';
-    src: url('../font/Microsoft YaHei UI Light.ttf') format('truetype');
-}
 body{
     background: #040e3a;
+    line-height: 1;
 }
 a{
     text-decoration: none;
@@ -27,6 +24,7 @@ nav{
     width: 100%;
     min-width: 1800px;
     height: 151px;
+    line-height: 1.4;
 }
 .title-nav{
     width: 100%;
@@ -41,6 +39,13 @@ nav{
     margin-top: 46px;
     float: left;
     text-align: center;
+    color: #24aef4;
+    font-size: 20px;
+    font-family: "Microsoft YaHei";
+    cursor: pointer;
+}
+.nav-text:hover{
+    color: #FFF54E;
 }
 .nav-text a{
     color: #24aef4;
@@ -48,6 +53,7 @@ nav{
     font-family: "Microsoft YaHei";
 }
 .nav-text a:hover{
+    text-decoration: none;
     color: #FFF54E;
 }
 .line{
@@ -336,7 +342,7 @@ select#food-market option{
     float: right;
     width: 550px;
     height: 635px;
-    margin-top: 55px;
+    margin-top: 53px;
     margin-right: 7px;
     position: relative;
     background: #040e3a;
@@ -355,10 +361,13 @@ select#food-market option{
     z-index: 1100;
     top: 11px;
     right: 28px;
+    border-spacing: 2px;
+    border-collapse:separate;
 }
 #excel-data th{
     width: 100px;
     text-align: center;
+    font-size: 16px;
     height: 40px;
     color:#FFF54E ;
     border: 1px solid #07306b;
@@ -368,7 +377,10 @@ select#food-market option{
 	z-index:1009;
     margin-top: 0;
     margin-left: 7px;
-    margin-right: -21px;
+    font-size: 16px;
+    width: 522px;
+    border-spacing: 2px;
+    border-collapse: separate;
 }
 #excel-td td{
 	width: 100px;
@@ -380,13 +392,17 @@ select#food-market option{
 }
 #excel-border{
     width: 28px;
-    height:635px ;
+    height:640px ;
     position: absolute;
-    top: 55px;
+    top: 50px;
     right: 0px;
     background: #040e3a;
     z-index: 1100;
 }
 .clear{
     clear: both;
+}
+.div3,.div3:hover{
+	text-decoration: none;
+	color:#fff54e;
 }

@@ -68,7 +68,7 @@ public class Dataservlet extends HttpServlet {
 		user.setMonth(month);
 		user.setMarket(market);
 		user.setResult(result);
-		System.out.println(user.getResult());
+		//System.out.println(user.getResult());
 		Connection connection = mysqldb.getConnection();
 		Statement stmt = null; 
 		ResultSet rs = null;
@@ -87,8 +87,9 @@ public class Dataservlet extends HttpServlet {
 				Date testtm = ()rs.getDate(6);
 			}*/
 			JSONArray jsonData = JSONArray.fromObject(convertList(rs));
-			System.out.println(jsonData.toString());
+			//System.out.println(jsonData.toString());
 			out.print(jsonData);
+			stmt.close();
 			connection.close();
 			
 		} catch (SQLException e) {
